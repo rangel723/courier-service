@@ -3,8 +3,9 @@ package com.everestengg.challenge.courier;
 //TODO:-@SpringBootTest
 class CourierServiceApplicationTests {
 
-	//TODO:-@Test
+	//@Test
 	void contextLoads() {
+		System.exit(0);
 	}
 
 }

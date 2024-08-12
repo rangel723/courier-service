@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.everestengg.challenge.courier.common.CommonConstants;
 import com.everestengg.challenge.courier.common.InvalidUserInputException;
-import com.everestengg.challenge.courier.model.PackageDetailsSummary;
+import com.everestengg.challenge.courier.model.PackageDetails;
 import com.everestengg.challenge.courier.useraction.service.UserActionService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,32 +18,33 @@ import lombok.extern.slf4j.Slf4j;
  * @author Rangel
  */
 @Slf4j
-@Service(CommonConstants.PACKAGE_SUMMARY_DETAILS_BEAN_ID)
-public class PackageDetailsSummaryPromptServiceImpl implements UserActionService {
-	
-	@Override
-	public PackageDetailsSummary promptUser(Scanner scanner) {
-		log.debug("Prompting user for package details.");
-		log.info(CommonConstants.PROMPT_PACKAGE_SUMMARY_DETAILS_MESSAGE);
+@Service(CommonConstants.PACKAGE_DETAILS_BEAN_ID)
+public class PackageDetailsPromptServiceImpl implements UserActionService {
 
-		Integer baseDeliveryCost = null;
-		Integer noOfPackages = null;
+	@Override
+	public PackageDetails promptUser(Scanner scanner) {
+		log.debug("Prompting user for package details.");
+		log.info(CommonConstants.PROMPT_PACKAGE_DETAILS_MESSAGE);
+
+		String packageId = null;
+		Integer packageWeight = null;
+		Integer deliveryDistance = null;
+		String offerCode = null;
 		boolean validInput = true;
 		do {
 			try {
-				baseDeliveryCost = scanner.nextInt();	
-				noOfPackages = scanner.nextInt();	
-				validInput = true;
+				packageId = scanner.next();
+				packageWeight = scanner.nextInt();
+				deliveryDistance = scanner.nextInt();
+				offerCode = scanner.next();
 			} catch (InputMismatchException ex) {
 				log.error(CommonConstants.INVALID_USER_INPUT_GENERIC);
 				scanner.next();
-				validInput = false;
 			}
-		} while(!validInput);
-		
-		
-		if(baseDeliveryCost != null && noOfPackages != null) {
-			return new PackageDetailsSummary(baseDeliveryCost, noOfPackages);
+		} while (!validInput);
+
+		if (packageId != null && packageWeight != null && deliveryDistance != null && offerCode != null) {
+			return new PackageDetails(packageId, packageWeight, deliveryDistance, offerCode);
 		}
 		throw new InvalidUserInputException(CommonConstants.INVALID_USER_INPUT_GENERIC);
 	}

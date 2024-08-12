@@ -19,7 +19,11 @@ public final class CommonConstants {
 	
 	public static final String INVALID_USER_INPUT = "\nPlease enter values between 1 & 3.";
 	
-	public static final String PROMPT_PACKAGE_DETAILS_MESSAGE = "\nPlease enter package details in the format: base_delivery_cost no_of_packges";
+	public static final String PROMPT_PACKAGE_SUMMARY_DETAILS_MESSAGE = "\nPlease enter package details in the format: base_delivery_cost no_of_packges";
+	
+	public static final String PROMPT_PACKAGE_DETAILS_MESSAGE = "\nPlease enter package details in the format: pkg_id1 pkg_weight1_in_kg distance1_in_km offer_code1";
+	
+	public static final String ITEMS_ADDED = "\nAll Items added";
 
 	public static final String PROMPT_ERROR_MESSAGE_GENERIC = "Invalid input";
 	
@@ -29,6 +33,8 @@ public final class CommonConstants {
 	
 	//Bean Ids
 	public static final String USER_ACTION_SELECTOR_BEAN_ID = "UserActionSelector";
+	
+	public static final String PACKAGE_SUMMARY_DETAILS_BEAN_ID = "PackageSummaryDetails";
 	
 	public static final String PACKAGE_DETAILS_BEAN_ID = "PackageDetails";
 	
