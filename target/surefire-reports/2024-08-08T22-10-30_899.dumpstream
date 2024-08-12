@@ -1,0 +1,5 @@
+# Created at 2024-08-08T22:10:31.194
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Workspaces\IoT\Neom\courier-service\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
