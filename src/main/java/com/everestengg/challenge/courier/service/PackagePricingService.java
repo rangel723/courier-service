@@ -14,7 +14,7 @@ public interface PackagePricingService {
 	 * @param packagePrice
 	 * @return
 	 */
-	double calculateDiscount(PackageDetails packageDetails, int packagePrice);
+	int calculateDiscount(PackageDetails packageDetails, int packagePrice);
 	
 	/**
 	 * @param baseDeliveryCost

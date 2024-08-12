@@ -21,9 +21,9 @@ public class DeliveryEstimate implements UserInput {
 
 	private String pkgId;
 	
-	private Double discount;
+	private Integer discount;
 	
-	private Double totalCost;
+	private Integer totalCost;
 	
 	private Float estimatedDeliveryTimeInHours;
 	

@@ -20,7 +20,7 @@ public class PackagePricingServiceImpl implements PackagePricingService {
 	private DiscountCouponCodeProperties discountOffers;
 
 	@Override
-	public double calculateDiscount(PackageDetails packageDetails, int deliveryCost) {
+	public int calculateDiscount(PackageDetails packageDetails, int deliveryCost) {
 		if (discountOffers.getCouponCodesMap().containsKey(packageDetails.getOfferCode())) {
 			CouponCode offer = discountOffers.getCouponCodesMap().get(packageDetails.getOfferCode());
 			int actualWeight = packageDetails.getPkgWeightInKg();
@@ -28,7 +28,8 @@ public class PackagePricingServiceImpl implements PackagePricingService {
 			if (actualWeight >= offer.getMinWeight() && actualWeight <= offer.getMaxWeight()
 					&& actualDistance >= offer.getMinDistance() && actualDistance <= offer.getMaxDistance()) {
 				int discountPercentage = offer.getDiscountInPercentage();
-				return discountPercentage * 0.01 * deliveryCost;
+				Double discountInDouble = discountPercentage * 0.01 * deliveryCost;
+				return discountInDouble.intValue();
 			}
 		}
 		return 0;

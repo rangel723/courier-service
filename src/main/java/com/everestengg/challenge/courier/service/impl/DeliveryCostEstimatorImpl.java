@@ -33,11 +33,11 @@ public class DeliveryCostEstimatorImpl implements DeliveryCostEstimator {
 		int baseDeliveryCost = packageDetailsSummary.getBaseDeliveryCost();
 		for(PackageDetails pkg: packageDetails) {
 			int deliveryCost = packagePricing.deliveryCost(baseDeliveryCost, pkg.getPkgWeightInKg(), pkg.getDistanceInKm());
-			double discount = packagePricing.calculateDiscount(pkg, deliveryCost);
-			double discountedPrice = deliveryCost - discount;
+			int discount = packagePricing.calculateDiscount(pkg, deliveryCost);
+			int discountedPrice = deliveryCost - discount;
 			estimate.add(DeliveryEstimate.builder().pkgId(pkg.getPkgId()).discount(discount).totalCost(discountedPrice).build());
 		}
-		log.info("Result = "+ estimate);
+		log.debug("Result = "+ estimate);
 		return estimate;
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.everestengg.challenge.courier.common.CommonConstants;
+import com.everestengg.challenge.courier.model.DeliveryEstimate;
 import com.everestengg.challenge.courier.model.PackageDetails;
 import com.everestengg.challenge.courier.model.PackageDetailsSummary;
 import com.everestengg.challenge.courier.service.DeliveryCostEstimator;
@@ -50,7 +51,17 @@ public class DeliveryCostEstimatorTaskServiceImpl implements TaskService {
 		}
 		log.info(CommonConstants.ITEMS_ADDED);
 		log.debug("{}", packageDetailsList);
-		deliveryCostEstimator.calcualteDeliveryCost(userInput, packageDetailsList);
+		List<DeliveryEstimate> deliveryEstimates = deliveryCostEstimator.calcualteDeliveryCost(userInput, packageDetailsList);
+		StringBuilder sb = new StringBuilder();
+		deliveryEstimates.stream().forEach(de-> {
+			sb.append(CommonConstants.NEXT_LINE);
+			sb.append(de.getPkgId());
+			sb.append(CommonConstants.SPACE);
+			sb.append(de.getDiscount());
+			sb.append(CommonConstants.SPACE);
+			sb.append(de.getTotalCost());
+		});
+		log.info(sb.toString());
 	}
 
 }
