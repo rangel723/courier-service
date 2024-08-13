@@ -1,8 +1,17 @@
+###target/courier-service-**.jar
 HELP.md
-target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+# Compiled class file
+
+*.class
+*.lst
+.gitignore
+pom.properties
+
+# Log file
+*.log
 
 ### STS ###
 .apt_generated
