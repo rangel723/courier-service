@@ -1,5 +1,5 @@
 /* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
-package com.everestengg.challenge.courier.task.service.impl;
+package com.everestengg.challenge.courier.service.task.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 
 import com.everestengg.challenge.courier.common.CommonConstants;
 import com.everestengg.challenge.courier.model.DeliveryEstimate;
-import com.everestengg.challenge.courier.model.PackageDetails;
-import com.everestengg.challenge.courier.model.PackageDetailsSummary;
-import com.everestengg.challenge.courier.service.DeliveryCostEstimator;
-import com.everestengg.challenge.courier.task.service.TaskService;
-import com.everestengg.challenge.courier.useraction.service.UserActionService;
+import com.everestengg.challenge.courier.model.Package;
+import com.everestengg.challenge.courier.model.PackageSummary;
+import com.everestengg.challenge.courier.service.delivery.DeliveryCostEstimator;
+import com.everestengg.challenge.courier.service.task.TaskService;
+import com.everestengg.challenge.courier.service.useraction.UserActionService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,15 +37,15 @@ public class DeliveryCostEstimatorTaskServiceImpl implements TaskService {
 	@Autowired
 	private DeliveryCostEstimator deliveryCostEstimator;
 	
-	List<PackageDetails> packageDetailsList = new ArrayList<>();
+	List<Package> packageDetailsList = new ArrayList<>();
 	
 	@Override
 	public void performTask(Scanner scanner) {
 		log.debug("Delivery Cost Estimator Task Service called..");
-		PackageDetailsSummary userInput = (PackageDetailsSummary) packageDetailsSummaryPromptService.promptUser(scanner);	
+		PackageSummary userInput = (PackageSummary) packageDetailsSummaryPromptService.promptUser(scanner);	
 		
 		for(int i=0; i<userInput.getNoOfPackages(); i++) {
-			PackageDetails packageDetails = (PackageDetails) packageDetailsPromptService.promptUser(scanner);
+			Package packageDetails = (Package) packageDetailsPromptService.promptUser(scanner);
 			packageDetailsList.add(packageDetails);
 		}
 		log.info(CommonConstants.ITEMS_ADDED);

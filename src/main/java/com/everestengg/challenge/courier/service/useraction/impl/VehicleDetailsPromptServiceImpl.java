@@ -1,6 +1,6 @@
 //TODO:- Remove Siemens details from copyright 
 /* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
-package com.everestengg.challenge.courier.useraction.service.impl;
+package com.everestengg.challenge.courier.service.useraction.impl;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,8 +8,8 @@ import java.util.Scanner;
 import org.springframework.stereotype.Service;
 
 import com.everestengg.challenge.courier.common.CommonConstants;
-import com.everestengg.challenge.courier.model.VehicleDetails;
-import com.everestengg.challenge.courier.useraction.service.UserActionService;
+import com.everestengg.challenge.courier.model.Vehicle;
+import com.everestengg.challenge.courier.service.useraction.UserActionService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class VehicleDetailsPromptServiceImpl implements UserActionService {
 	
 	@Override
-	public VehicleDetails promptUser(Scanner scanner) {
+	public Vehicle promptUser(Scanner scanner) {
 		log.debug("Prompting user for vehicle details input.");
 		log.info(CommonConstants.PROMPT_VEHICLE_DETAILS_MESSAGE);
 
@@ -41,7 +41,7 @@ public class VehicleDetailsPromptServiceImpl implements UserActionService {
 			}
 		} while (!validInput);
 		
-		VehicleDetails vehicleDetails = new VehicleDetails(noOfVehicles, maxSpeed, maxCarriableWeight); 
+		Vehicle vehicleDetails = new Vehicle(noOfVehicles, maxSpeed, maxCarriableWeight); 
 		log.debug("Prompt action completed. User input is - {}", vehicleDetails);
 		return vehicleDetails;
 	}

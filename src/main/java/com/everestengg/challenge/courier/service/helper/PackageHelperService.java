@@ -1,20 +1,20 @@
 /* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
-package com.everestengg.challenge.courier.service;
+package com.everestengg.challenge.courier.service.helper;
 
-import com.everestengg.challenge.courier.model.PackageDetails;
+import com.everestengg.challenge.courier.model.Package;
 
 /**
  * @author Rangel
  * 
  */
-public interface PackagePricingService {
+public interface PackageHelperService {
 
 	/**
 	 * @param packageDetails
 	 * @param packagePrice
 	 * @return
 	 */
-	int applyDiscount(PackageDetails packageDetails, int packagePrice);
+	int applyDiscount(Package packageDetails, int packagePrice);
 	
 	/**
 	 * @param baseDeliveryCost
@@ -30,5 +30,5 @@ public interface PackagePricingService {
 	 * @param speed
 	 * @return
 	 */
-	int calculateTime(int distance, int speed);
+	double deliveryTime(int distance, int speed);
 }

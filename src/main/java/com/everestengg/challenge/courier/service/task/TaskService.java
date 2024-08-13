@@ -1,5 +1,5 @@
 /* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
-package com.everestengg.challenge.courier.task.service;
+package com.everestengg.challenge.courier.service.task;
 
 import java.util.Scanner;
 

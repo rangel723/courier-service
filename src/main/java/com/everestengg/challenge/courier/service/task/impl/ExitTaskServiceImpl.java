@@ -1,12 +1,12 @@
 /* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
-package com.everestengg.challenge.courier.task.service.impl;
+package com.everestengg.challenge.courier.service.task.impl;
 
 import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
 
 import com.everestengg.challenge.courier.common.CommonConstants;
-import com.everestengg.challenge.courier.task.service.TaskService;
+import com.everestengg.challenge.courier.service.task.TaskService;
 
 import lombok.extern.slf4j.Slf4j;
 

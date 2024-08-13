@@ -13,13 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class PackageDetails implements UserInput {
+public class PackageSummary implements UserInput {
 
-	private String pkgId;
+	Integer baseDeliveryCost;
 	
-	private Integer pkgWeightInKg;
+	Integer noOfPackages;
 	
-	private Integer distanceInKm;
-	
-	private String offerCode;
 }

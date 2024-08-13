@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.everestengg.challenge.courier.task.service.TaskService;
+import com.everestengg.challenge.courier.service.task.TaskService;
 
 import lombok.RequiredArgsConstructor;
 

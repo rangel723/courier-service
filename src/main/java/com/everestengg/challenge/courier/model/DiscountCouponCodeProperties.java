@@ -16,7 +16,7 @@ import lombok.Data;
 /**
  * @author Rangel
  * 
- * Coupon configuration will be read from application.yml config file
+ * Pojo class for coupon configuration. Will be read from application.yml config file
  */
 @Configuration
 @ConfigurationProperties(prefix = "offer-criteria")

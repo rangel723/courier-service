@@ -1,26 +1,29 @@
 /* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
-package com.everestengg.challenge.courier.service.impl;
+package com.everestengg.challenge.courier.service.helper.impl;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.everestengg.challenge.courier.model.DiscountCouponCodeProperties;
 import com.everestengg.challenge.courier.model.DiscountCouponCodeProperties.CouponCode;
-import com.everestengg.challenge.courier.model.PackageDetails;
-import com.everestengg.challenge.courier.service.PackagePricingService;
+import com.everestengg.challenge.courier.model.Package;
+import com.everestengg.challenge.courier.service.helper.PackageHelperService;
 
 /**
  * @author Rangel
  * 
  */
 @Service
-public class PackagePricingServiceImpl implements PackagePricingService {
+public class PackageHelperServiceImpl implements PackageHelperService {
 
 	@Autowired
 	private DiscountCouponCodeProperties discountOffers;
 
 	@Override
-	public int applyDiscount(PackageDetails packageDetails, int deliveryCost) {
+	public int applyDiscount(Package packageDetails, int deliveryCost) {
 		if (discountOffers.getCouponCodesMap().containsKey(packageDetails.getOfferCode())) {
 			CouponCode offer = discountOffers.getCouponCodesMap().get(packageDetails.getOfferCode());
 			int actualWeight = packageDetails.getPkgWeightInKg();
@@ -41,9 +44,14 @@ public class PackagePricingServiceImpl implements PackagePricingService {
 	}
 
 	@Override
-	public int calculateTime(int distance, int speed) {
-		return distance / speed;
+	public double deliveryTime(int distance, int speed) {
+		if(speed != 0) {
+			double time = (double)distance/speed;
+			DecimalFormat df = new DecimalFormat("0.##");
+		    df.setRoundingMode(RoundingMode.DOWN);
+			return Double.valueOf(df.format(time));
+		}
+		return 0;
 	}
-	
 	
 }

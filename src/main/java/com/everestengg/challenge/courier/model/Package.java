@@ -13,11 +13,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class VehicleDetails implements UserInput {
+public class Package implements UserInput {
 
-	private Integer noOfVehicles;
+	private String pkgId;
 	
-	private Integer maxSpeed;
+	private Integer pkgWeightInKg;
 	
-	private Integer maxCarriableWeight;
+	private Integer distanceInKm;
+	
+	private String offerCode;
 }
