@@ -2,6 +2,7 @@
 package com.everestengg.challenge.courier.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
  */
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class VehicleDetails implements UserInput {
 

@@ -6,6 +6,7 @@ import java.util.List;
 import com.everestengg.challenge.courier.model.DeliveryEstimate;
 import com.everestengg.challenge.courier.model.PackageDetails;
 import com.everestengg.challenge.courier.model.PackageDetailsSummary;
+import com.everestengg.challenge.courier.model.VehicleDetails;
 
 /**
  * @author Rangel
@@ -18,12 +19,13 @@ public interface DeliveryCostEstimator {
 	 * @param packageDetails
 	 * @return
 	 */
-	List<DeliveryEstimate> calcualteDeliveryCost(PackageDetailsSummary packageDetailsSummary, List<PackageDetails> packageDetails);	
+	List<DeliveryEstimate> calculateDeliveryCost(PackageDetailsSummary packageDetailsSummary, List<PackageDetails> packageDetails);	
 	
 	/**
 	 * @param packageDetailsSummary
 	 * @param packageDetails
+	 * @param vehicleDetails 
 	 * @return
 	 */
-	List<DeliveryEstimate> calcualteDeliveryTime(PackageDetailsSummary packageDetailsSummary, List<PackageDetails> packageDetails);	
+	List<DeliveryEstimate> calcualteDeliveryTime(PackageDetailsSummary packageDetailsSummary, List<PackageDetails> packageDetails, VehicleDetails vehicleDetails);	
 }

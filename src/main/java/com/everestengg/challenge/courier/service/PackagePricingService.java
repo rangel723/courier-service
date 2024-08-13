@@ -14,7 +14,7 @@ public interface PackagePricingService {
 	 * @param packagePrice
 	 * @return
 	 */
-	int calculateDiscount(PackageDetails packageDetails, int packagePrice);
+	int applyDiscount(PackageDetails packageDetails, int packagePrice);
 	
 	/**
 	 * @param baseDeliveryCost
@@ -23,4 +23,12 @@ public interface PackagePricingService {
 	 * @return
 	 */
 	int deliveryCost(int baseDeliveryCost, int weight, int distance);
+	
+	/**
+	 * 
+	 * @param distance
+	 * @param speed
+	 * @return
+	 */
+	int calculateTime(int distance, int speed);
 }

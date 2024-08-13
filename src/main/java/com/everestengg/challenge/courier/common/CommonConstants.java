@@ -23,6 +23,8 @@ public final class CommonConstants {
 	
 	public static final String PROMPT_PACKAGE_DETAILS_MESSAGE = "\nPlease enter package details in the format: pkg_id1 pkg_weight1_in_kg distance1_in_km offer_code1";
 	
+	public static final String PROMPT_VEHICLE_DETAILS_MESSAGE = "\nPlease enter vehicle details in the format: pkg_id1 discount1 total_cost1 estimated_delivery_time1_in_hours";
+	
 	public static final String ITEMS_ADDED = "\nAll packages added";
 
 	public static final String PROMPT_ERROR_MESSAGE_GENERIC = "\nInvalid input";
@@ -37,6 +39,8 @@ public final class CommonConstants {
 	public static final String PACKAGE_SUMMARY_DETAILS_BEAN_ID = "PackageSummaryDetails";
 	
 	public static final String PACKAGE_DETAILS_BEAN_ID = "PackageDetails";
+	
+	public static final String VEHICLE_DETAILS_BEAN_ID = "VehicleDetails";
 	
 	public static final String DELIVERY_COST_ESTIMATOR_TASK_BEAN_ID = "1";
 	

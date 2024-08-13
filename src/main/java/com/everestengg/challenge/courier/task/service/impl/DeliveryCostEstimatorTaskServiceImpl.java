@@ -44,14 +44,13 @@ public class DeliveryCostEstimatorTaskServiceImpl implements TaskService {
 		log.debug("Delivery Cost Estimator Task Service called..");
 		PackageDetailsSummary userInput = (PackageDetailsSummary) packageDetailsSummaryPromptService.promptUser(scanner);	
 		
-		//TODO- ID field auto generate
 		for(int i=0; i<userInput.getNoOfPackages(); i++) {
 			PackageDetails packageDetails = (PackageDetails) packageDetailsPromptService.promptUser(scanner);
 			packageDetailsList.add(packageDetails);
 		}
 		log.info(CommonConstants.ITEMS_ADDED);
 		log.debug("{}", packageDetailsList);
-		List<DeliveryEstimate> deliveryEstimates = deliveryCostEstimator.calcualteDeliveryCost(userInput, packageDetailsList);
+		List<DeliveryEstimate> deliveryEstimates = deliveryCostEstimator.calculateDeliveryCost(userInput, packageDetailsList);
 		StringBuilder sb = new StringBuilder();
 		deliveryEstimates.stream().forEach(de-> {
 			sb.append(CommonConstants.NEXT_LINE);

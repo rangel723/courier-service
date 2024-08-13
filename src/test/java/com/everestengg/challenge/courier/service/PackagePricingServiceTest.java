@@ -46,11 +46,11 @@ class PackagePricingServiceTest {
 		couponsMap.put(OFR002, CouponCode.builder().id("OFR002").minDistance(50).maxDistance(150).minWeight(100).maxWeight(250).discountInPercentage(7).build()); 
 		couponsMap.put(OFR003, CouponCode.builder().id("OFR003").minDistance(50).maxDistance(250).minWeight(10).maxWeight(150).discountInPercentage(5).build());
 		when(discountOffers.getCouponCodesMap()).thenReturn(couponsMap);
-		double result = underTests.calculateDiscount(PackageDetails.builder().pkgId("pkg1").offerCode(OFR001).distanceInKm(10).pkgWeightInKg(20).build(), 100);
+		double result = underTests.applyDiscount(PackageDetails.builder().pkgId("pkg1").offerCode(OFR001).distanceInKm(10).pkgWeightInKg(20).build(), 100);
 		assertEquals(0, result);
-		result = underTests.calculateDiscount(PackageDetails.builder().pkgId("pkg1").offerCode(OFR001).distanceInKm(10).pkgWeightInKg(80).build(), 100);
+		result = underTests.applyDiscount(PackageDetails.builder().pkgId("pkg1").offerCode(OFR001).distanceInKm(10).pkgWeightInKg(80).build(), 100);
 		assertEquals(10, result);
-		result = underTests.calculateDiscount(PackageDetails.builder().pkgId("pkg1").offerCode(OFR003).distanceInKm(100).pkgWeightInKg(10).build(), 700);
+		result = underTests.applyDiscount(PackageDetails.builder().pkgId("pkg1").offerCode(OFR003).distanceInKm(100).pkgWeightInKg(10).build(), 700);
 		assertEquals(35, result);
 	}
 
