@@ -1,8 +1,15 @@
-# Steps to run
-set JAVA_HOME="C:\Program Files\Java\jdk-17"
-set PATH=%JAVA_HOME%\bin;%PATH%
+# Kiki's Delivery Service
 
-# Application brief
+### Prerequisite to run application:
+ - Java version 17
+ - Maven
 
-# Notes:- //TODO:-
-1. Read offers from csv file
+### Steps to run:
+ - Navigate to the project checkout directory
+ - To build the application, run the command ```mvn clean install```
+ - Navigate under target folder
+ - To start the application, use the command ```java -jar courier-service-1.0.0-SNAPSHOT.jar```
+
+### Additional info:
+ - Discount codes are mentioned in the application.yml file
+ - See 'offer-criteria' section. The coupon codes can be added/updated if required

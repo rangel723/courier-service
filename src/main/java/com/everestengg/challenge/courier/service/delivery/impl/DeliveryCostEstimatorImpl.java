@@ -1,4 +1,4 @@
-/* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
+/* Copyright © 2023 ALL RIGHTS RESERVED. */
 package com.everestengg.challenge.courier.service.delivery.impl;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DeliveryCostEstimatorImpl implements DeliveryCostEstimator {
 	
 	@Autowired
-	private PackageHelperService packagePricing;
+	private PackageHelperService packageHelper;
 	
 	@Override
 	public List<DeliveryEstimate> calculateDeliveryCost(PackageSummary packageDetailsSummary,
@@ -43,8 +43,8 @@ public class DeliveryCostEstimatorImpl implements DeliveryCostEstimator {
 	private DeliveryEstimate calculateDeliveryCost(PackageSummary packageDetailsSummary,
 			Package pkg) {
 		int baseDeliveryCost = packageDetailsSummary.getBaseDeliveryCost();
-		int deliveryCost = packagePricing.deliveryCost(baseDeliveryCost, pkg.getPkgWeightInKg(), pkg.getDistanceInKm());
-		int discount = packagePricing.applyDiscount(pkg, deliveryCost);
+		int deliveryCost = packageHelper.deliveryCost(baseDeliveryCost, pkg.getPkgWeightInKg(), pkg.getDistanceInKm());
+		int discount = packageHelper.applyDiscount(pkg, deliveryCost);
 		int discountedPrice = deliveryCost - discount;
 		return DeliveryEstimate.builder().pkgId(pkg.getPkgId()).discount(discount).totalCost(discountedPrice).build();
 	}
@@ -85,7 +85,7 @@ public class DeliveryCostEstimatorImpl implements DeliveryCostEstimator {
 	        
 	        freightToTransport.addAll(freightList.get(0).getFreightItems());
 	        log.debug("DeliveryDistance- {}", freightList.get(0).getDeliveryDistance());
-	        log.debug("DeliveryTime- {}", packagePricing.deliveryTime(freightList.get(0).getDeliveryDistance(), vehicleDetails.getMaxSpeed()));
+	        log.debug("DeliveryTime- {}", packageHelper.deliveryTime(freightList.get(0).getDeliveryDistance(), vehicleDetails.getMaxSpeed()));
 	        
 	        //Vehicle
 	        

@@ -1,4 +1,4 @@
-/* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
+/* Copyright © 2023 ALL RIGHTS RESERVED. */
 package com.everestengg.challenge.courier.service.helper.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +17,6 @@ import com.everestengg.challenge.courier.model.DiscountCouponCodeProperties;
 import com.everestengg.challenge.courier.model.DiscountCouponCodeProperties.CouponCode;
 import com.everestengg.challenge.courier.model.Package;
 import com.everestengg.challenge.courier.service.helper.PackageHelperService;
-import com.everestengg.challenge.courier.service.helper.impl.PackageHelperServiceImpl;
 
 /**
  * @author Rangel

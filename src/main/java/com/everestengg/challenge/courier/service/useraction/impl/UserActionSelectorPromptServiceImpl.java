@@ -1,5 +1,4 @@
-//TODO:- Remove Siemens details from copyright 
-/* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
+/* Copyright © 2023 ALL RIGHTS RESERVED. */
 package com.everestengg.challenge.courier.service.useraction.impl;
 
 import java.util.InputMismatchException;
