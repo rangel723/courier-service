@@ -10,28 +10,35 @@ public final class CommonConstants {
 	
 	private CommonConstants() {}
 	
+	//
+	public static final String NEXT_LINE = "\n ";
+	public static final String NEW_LINE = "\n\n";
+	public static final String SPACE = "\t";
+	public static final String SPACE_BEFORE ="\n\n\t";
+	public static final String ESTIMATION_RESULT ="\n Delivery estimation result is:- ";
+	
 	// Console prompts
-	public static final String PROMPT_USER_ACTIONS_MESSAGE = "\n\nWelcome to Kiki's courier's. Please select from menu options below:\n1. Delivery cost estimator\n2. Delivery time estimator\n3. Exit";
+	public static final String PROMPT_USER_ACTIONS_MESSAGE = SPACE_BEFORE + "Welcome to Kiki's courier's. Please select from menu options below:\n\t1. Delivery cost estimator\n\t2. Delivery time estimator\n\t3. Exit" + NEW_LINE;
 	
-	public static final String PROMPT_ERROR_MESSAGE = "\nYou must only input numeric value from the above options. Eg. 1";
+	public static final String PROMPT_ERROR_MESSAGE = SPACE_BEFORE + "You must only input numeric value from the above options. Eg. 1" + NEW_LINE;
 	
-	public static final String PROMPT_SELECTED = "\nOption selected is {}";
+	public static final String PROMPT_SELECTED = SPACE_BEFORE + "Option selected is {}" + NEW_LINE;
 	
-	public static final String INVALID_USER_INPUT = "\nPlease enter values between 1 & 3.";
+	public static final String INVALID_USER_INPUT = SPACE_BEFORE + "Please enter values between 1 & 3." + NEW_LINE;
 	
-	public static final String PROMPT_PACKAGE_SUMMARY_DETAILS_MESSAGE = "\nPlease enter package details in the format: base_delivery_cost no_of_packges";
+	public static final String PROMPT_PACKAGE_SUMMARY_DETAILS_MESSAGE = SPACE_BEFORE + "Please enter package details in the format: base_delivery_cost no_of_packges" + NEW_LINE;
 	
-	public static final String PROMPT_PACKAGE_DETAILS_MESSAGE = "\nPlease enter package details in the format: pkg_id1 pkg_weight1_in_kg distance1_in_km offer_code1";
+	public static final String PROMPT_PACKAGE_DETAILS_MESSAGE = SPACE_BEFORE + "Please enter package details in the format: pkg_id1 pkg_weight1_in_kg distance1_in_km offer_code1" + NEW_LINE;
 	
-	public static final String PROMPT_VEHICLE_DETAILS_MESSAGE = "\nPlease enter vehicle details in the format: pkg_id1 discount1 total_cost1 estimated_delivery_time1_in_hours";
+	public static final String PROMPT_VEHICLE_DETAILS_MESSAGE = SPACE_BEFORE + "Please enter vehicle details in the format: pkg_id1 discount1 total_cost1 estimated_delivery_time1_in_hours" + NEW_LINE;
 	
-	public static final String ITEMS_ADDED = "\nAll packages added";
+	public static final String ITEMS_ADDED = SPACE_BEFORE + "All packages added" + NEW_LINE;
 
-	public static final String PROMPT_ERROR_MESSAGE_GENERIC = "\nInvalid input";
+	public static final String PROMPT_ERROR_MESSAGE_GENERIC = SPACE_BEFORE + "Invalid input" + NEW_LINE;
 	
-	public static final String PROMPT_INPUT_MESSAGE_GENERIC = "\nInput is - {}";
+	public static final String PROMPT_INPUT_MESSAGE_GENERIC = SPACE_BEFORE + "Input is - {}" + NEW_LINE;
 	
-	public static final String INVALID_USER_INPUT_GENERIC = "\nPlease enter a valid input";
+	public static final String INVALID_USER_INPUT_GENERIC = SPACE_BEFORE + "Please enter a valid input" + NEW_LINE;
 	
 	//Bean Ids
 	public static final String USER_ACTION_SELECTOR_BEAN_ID = "UserActionSelector";
@@ -49,7 +56,4 @@ public final class CommonConstants {
 	public static final String EXIT_TASK_BEAN_ID = "3";
 		
 
-	//
-	public static final String NEXT_LINE = "\n ";
-	public static final String SPACE = " ";
 }

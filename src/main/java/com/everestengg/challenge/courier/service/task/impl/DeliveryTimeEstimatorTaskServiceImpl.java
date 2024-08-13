@@ -60,6 +60,10 @@ public class DeliveryTimeEstimatorTaskServiceImpl implements TaskService {
 		Vehicle vehicleDetails = (Vehicle) vehicleDetailsPromptService.promptUser(scanner);
 		List<DeliveryEstimate> timeEstimates = deliveryEstimator.calcualteDeliveryTime(packageSummary, packageDetailsList, vehicleDetails);
 		StringBuilder sb = new StringBuilder();
+		sb.append(CommonConstants.NEW_LINE);
+		sb.append(CommonConstants.ESTIMATION_RESULT);
+		sb.append("\n pkg_id1  discount1  total_cost1  estimated_delivery_time1_in_hours");
+		sb.append(CommonConstants.NEXT_LINE);
 		timeEstimates.stream().forEach(de-> {
 			sb.append(CommonConstants.NEXT_LINE);
 			sb.append(de.getPkgId());
@@ -67,7 +71,11 @@ public class DeliveryTimeEstimatorTaskServiceImpl implements TaskService {
 			sb.append(de.getDiscount());
 			sb.append(CommonConstants.SPACE);
 			sb.append(de.getTotalCost());
+			sb.append(CommonConstants.SPACE);
+			sb.append(de.getEstimatedDeliveryTimeInHours());
+			sb.append(CommonConstants.SPACE);
 		});
+		sb.append(CommonConstants.NEXT_LINE);
 		log.info(sb.toString());
 	
 	}

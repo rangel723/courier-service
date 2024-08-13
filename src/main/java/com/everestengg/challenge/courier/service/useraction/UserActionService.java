@@ -14,7 +14,7 @@ public interface UserActionService {
 	/**
 	 * Takes input from user on operations to perform
 	 * @param scanner 
-	 * @return UserInput
+	 * @return UserInput read from console
 	 * @throws InvalidUserInputException 
 	 */
 	UserInput promptUser(Scanner scanner) throws InvalidUserInputException;

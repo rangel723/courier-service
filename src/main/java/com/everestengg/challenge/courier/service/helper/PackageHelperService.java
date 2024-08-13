@@ -20,7 +20,7 @@ public interface PackageHelperService {
 	 * @param baseDeliveryCost
 	 * @param weight
 	 * @param distance
-	 * @return
+	 * @return the computed delivery cost based on the formula - <strong> Delivery cost = Base Delivery Cost + (Package Total Weight * 10) + (Distance to Destination * 5)</strong>  
 	 */
 	int deliveryCost(int baseDeliveryCost, int weight, int distance);
 	
@@ -28,7 +28,7 @@ public interface PackageHelperService {
 	 * 
 	 * @param distance
 	 * @param speed
-	 * @return
+	 * @return the delivery time. Formula - <strong> time = distance / speed </strong>
 	 */
 	double deliveryTime(int distance, int speed);
 	

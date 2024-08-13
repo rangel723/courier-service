@@ -54,9 +54,7 @@ public class CourierServiceApplication implements CommandLineRunner {
 					log.error(ex.getMessage());
 				}
 				
-				if(userInput != null && userInput.getUserSelection() != null && userInput.getUserSelection() == 3) {
-					userInputNumber3 = true;
-				} else if(userInput != null && userInput.getUserSelection() != null) {
+				if(userInput != null && userInput.getUserSelection() != null) {
 					TaskService task = taskStratergyFactory.getServiceTask(userInput.getUserSelection().toString());
 					task.performTask(scanner);
 				} 

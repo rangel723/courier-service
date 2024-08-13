@@ -17,7 +17,7 @@ public interface DeliveryEstimator {
 	/**
 	 * @param packageSummary 
 	 * @param packages
-	 * @return
+	 * @return the delivery estimate for the packages including delivery cost
 	 */
 	List<DeliveryEstimate> calculateDeliveryCost(PackageSummary packageSummary, List<Package> packages);	
 	
@@ -25,7 +25,7 @@ public interface DeliveryEstimator {
 	 * @param packageSummary
 	 * @param packages
 	 * @param vehicleDetails 
-	 * @return
+	 * @return the delivery estimate for the packages including delivery cost & delivery time
 	 */
 	List<DeliveryEstimate> calcualteDeliveryTime(PackageSummary packageSummary, List<Package> packages, Vehicle vehicleDetails);
 

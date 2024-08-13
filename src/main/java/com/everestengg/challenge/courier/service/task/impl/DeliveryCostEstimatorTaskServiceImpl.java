@@ -52,6 +52,10 @@ public class DeliveryCostEstimatorTaskServiceImpl implements TaskService {
 		log.debug("{}", packageDetailsList);
 		List<DeliveryEstimate> deliveryEstimates = deliveryEstimator.calculateDeliveryCost(userInput, packageDetailsList);
 		StringBuilder sb = new StringBuilder();
+		sb.append(CommonConstants.NEW_LINE);
+		sb.append(CommonConstants.ESTIMATION_RESULT);
+		sb.append("\n pkg_id1  discount1  total_cost1");
+		sb.append(CommonConstants.NEXT_LINE);
 		deliveryEstimates.stream().forEach(de-> {
 			sb.append(CommonConstants.NEXT_LINE);
 			sb.append(de.getPkgId());
@@ -60,8 +64,8 @@ public class DeliveryCostEstimatorTaskServiceImpl implements TaskService {
 			sb.append(CommonConstants.SPACE);
 			sb.append(de.getTotalCost());
 			sb.append(CommonConstants.SPACE);
-			sb.append(de.getEstimatedDeliveryTimeInHours());
 		});
+		sb.append(CommonConstants.NEXT_LINE);
 		log.info(sb.toString());
 	}
 

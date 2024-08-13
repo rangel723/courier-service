@@ -20,6 +20,7 @@ public class ExitTaskServiceImpl implements TaskService {
 	@Override
 	public void performTask(Scanner scanner) {
 		log.debug("Exit Task called. System will exit.");
+		log.info("\n\n\tThank You!!!"); 
 		System.exit(0);
 	}
 
