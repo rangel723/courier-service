@@ -1,7 +1,8 @@
-/* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
+/* Copyright © 2023 ALL RIGHTS RESERVED. */
 package com.everestengg.challenge.courier.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,12 +11,14 @@ import lombok.NoArgsConstructor;
  */
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
-public class VehicleDetails implements UserInput {
+public class Vehicle implements UserInput {
 
 	private Integer noOfVehicles;
 	
 	private Integer maxSpeed;
 	
 	private Integer maxCarriableWeight;
+	
 }

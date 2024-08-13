@@ -1,6 +1,5 @@
-//TODO:- Remove Siemens details from copyright 
-/* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
-package com.everestengg.challenge.courier.useraction.service.impl;
+/* Copyright © 2023 ALL RIGHTS RESERVED. */
+package com.everestengg.challenge.courier.service.useraction.impl;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.everestengg.challenge.courier.common.CommonConstants;
 import com.everestengg.challenge.courier.common.InvalidUserInputException;
 import com.everestengg.challenge.courier.model.UserOptionSelection;
-import com.everestengg.challenge.courier.useraction.service.UserActionService;
+import com.everestengg.challenge.courier.service.useraction.UserActionService;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,7 +1,8 @@
-/* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
+/* Copyright © 2023 ALL RIGHTS RESERVED. */
 package com.everestengg.challenge.courier.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,8 +11,9 @@ import lombok.NoArgsConstructor;
  */
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
-public class PackageDetailsSummary implements UserInput {
+public class PackageSummary implements UserInput {
 
 	Integer baseDeliveryCost;
 	

@@ -10,10 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.everestengg.challenge.courier.common.CommonConstants;
 import com.everestengg.challenge.courier.common.InvalidUserInputException;
+import com.everestengg.challenge.courier.factory.TaskServiceFactory;
 import com.everestengg.challenge.courier.model.UserOptionSelection;
-import com.everestengg.challenge.courier.stratergy.TaskStrategyFactory;
-import com.everestengg.challenge.courier.task.service.TaskService;
-import com.everestengg.challenge.courier.useraction.service.UserActionService;
+import com.everestengg.challenge.courier.service.task.TaskService;
+import com.everestengg.challenge.courier.service.useraction.UserActionService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +31,7 @@ public class CourierServiceApplication implements CommandLineRunner {
 	private UserActionService userActionSelectorPromptService;
 	
 	@Autowired
-	private TaskStrategyFactory taskStratergyFactory;
+	private TaskServiceFactory taskStratergyFactory;
 
 	/**
 	 * @param args
@@ -54,10 +54,8 @@ public class CourierServiceApplication implements CommandLineRunner {
 					log.error(ex.getMessage());
 				}
 				
-				if(userInput != null && userInput.getUserSelection() != null && userInput.getUserSelection() == 3) {
-					userInputNumber3 = true;
-				} else if(userInput != null && userInput.getUserSelection() != null) {
-					TaskService task = taskStratergyFactory.getDataStrategy(userInput.getUserSelection().toString());
+				if(userInput != null && userInput.getUserSelection() != null) {
+					TaskService task = taskStratergyFactory.getServiceTask(userInput.getUserSelection().toString());
 					task.performTask(scanner);
 				} 
 			} while(!userInputNumber3);

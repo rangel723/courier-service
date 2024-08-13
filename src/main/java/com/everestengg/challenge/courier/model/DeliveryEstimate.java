@@ -1,4 +1,4 @@
-/* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
+/* Copyright © 2023 ALL RIGHTS RESERVED. */
 package com.everestengg.challenge.courier.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -21,10 +21,10 @@ public class DeliveryEstimate implements UserInput {
 
 	private String pkgId;
 	
-	private Double discount;
+	private Integer discount;
 	
-	private Double totalCost;
+	private Integer totalCost;
 	
-	private Float estimatedDeliveryTimeInHours;
+	private Double estimatedDeliveryTimeInHours;
 	
 }

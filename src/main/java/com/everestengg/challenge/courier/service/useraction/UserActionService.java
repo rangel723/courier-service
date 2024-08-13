@@ -1,5 +1,5 @@
-/* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
-package com.everestengg.challenge.courier.useraction.service;
+/* Copyright © 2023 ALL RIGHTS RESERVED. */
+package com.everestengg.challenge.courier.service.useraction;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public interface UserActionService {
 	/**
 	 * Takes input from user on operations to perform
 	 * @param scanner 
-	 * @return UserInput
+	 * @return UserInput read from console
 	 * @throws InvalidUserInputException 
 	 */
 	UserInput promptUser(Scanner scanner) throws InvalidUserInputException;
