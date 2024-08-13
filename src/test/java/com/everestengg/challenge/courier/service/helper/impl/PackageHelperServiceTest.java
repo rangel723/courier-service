@@ -22,7 +22,7 @@ import com.everestengg.challenge.courier.service.helper.PackageHelperService;
  * @author Rangel
  * 
  */
-class PackagePricingServiceTest {
+class PackageHelperServiceTest {
 
 	@Mock
 	DiscountCouponCodeProperties discountOffers;
