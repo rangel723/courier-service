@@ -1,5 +1,5 @@
 /* Copyright © Siemens AG 2023 ALL RIGHTS RESERVED. */
-package com.everestengg.challenge.courier.service;
+package com.everestengg.challenge.courier.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import com.everestengg.challenge.courier.model.DiscountCouponCodeProperties;
 import com.everestengg.challenge.courier.model.DiscountCouponCodeProperties.CouponCode;
 import com.everestengg.challenge.courier.model.PackageDetails;
+import com.everestengg.challenge.courier.service.PackagePricingService;
 import com.everestengg.challenge.courier.service.impl.PackagePricingServiceImpl;
 
 /**

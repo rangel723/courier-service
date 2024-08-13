@@ -27,5 +27,6 @@ public interface DeliveryCostEstimator {
 	 * @param vehicleDetails 
 	 * @return
 	 */
-	List<DeliveryEstimate> calcualteDeliveryTime(PackageDetailsSummary packageDetailsSummary, List<PackageDetails> packageDetails, VehicleDetails vehicleDetails);	
+	List<DeliveryEstimate> calcualteDeliveryTime(PackageDetailsSummary packageDetailsSummary, List<PackageDetails> packageDetails, VehicleDetails vehicleDetails);
+
 }
