@@ -13,7 +13,7 @@ import com.everestengg.challenge.courier.common.CommonConstants;
 import com.everestengg.challenge.courier.model.DeliveryEstimate;
 import com.everestengg.challenge.courier.model.Package;
 import com.everestengg.challenge.courier.model.PackageSummary;
-import com.everestengg.challenge.courier.service.delivery.DeliveryCostEstimator;
+import com.everestengg.challenge.courier.service.delivery.DeliveryEstimator;
 import com.everestengg.challenge.courier.service.task.TaskService;
 import com.everestengg.challenge.courier.service.useraction.UserActionService;
 
@@ -35,7 +35,7 @@ public class DeliveryCostEstimatorTaskServiceImpl implements TaskService {
 	private UserActionService packageDetailsPromptService;
 	
 	@Autowired
-	private DeliveryCostEstimator deliveryCostEstimator;
+	private DeliveryEstimator deliveryEstimator;
 	
 	List<Package> packageDetailsList = new ArrayList<>();
 	
@@ -50,7 +50,7 @@ public class DeliveryCostEstimatorTaskServiceImpl implements TaskService {
 		}
 		log.info(CommonConstants.ITEMS_ADDED);
 		log.debug("{}", packageDetailsList);
-		List<DeliveryEstimate> deliveryEstimates = deliveryCostEstimator.calculateDeliveryCost(userInput, packageDetailsList);
+		List<DeliveryEstimate> deliveryEstimates = deliveryEstimator.calculateDeliveryCost(userInput, packageDetailsList);
 		StringBuilder sb = new StringBuilder();
 		deliveryEstimates.stream().forEach(de-> {
 			sb.append(CommonConstants.NEXT_LINE);
@@ -59,6 +59,8 @@ public class DeliveryCostEstimatorTaskServiceImpl implements TaskService {
 			sb.append(de.getDiscount());
 			sb.append(CommonConstants.SPACE);
 			sb.append(de.getTotalCost());
+			sb.append(CommonConstants.SPACE);
+			sb.append(de.getEstimatedDeliveryTimeInHours());
 		});
 		log.info(sb.toString());
 	}

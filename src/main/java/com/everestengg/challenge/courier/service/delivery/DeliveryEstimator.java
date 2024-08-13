@@ -12,21 +12,21 @@ import com.everestengg.challenge.courier.model.Vehicle;
  * @author Rangel
  * 
  */
-public interface DeliveryCostEstimator {
+public interface DeliveryEstimator {
 
 	/**
-	 * @param packageDetailsSummary 
-	 * @param packageDetails
+	 * @param packageSummary 
+	 * @param packages
 	 * @return
 	 */
-	List<DeliveryEstimate> calculateDeliveryCost(PackageSummary packageDetailsSummary, List<Package> packageDetails);	
+	List<DeliveryEstimate> calculateDeliveryCost(PackageSummary packageSummary, List<Package> packages);	
 	
 	/**
-	 * @param packageDetailsSummary
-	 * @param packageDetails
+	 * @param packageSummary
+	 * @param packages
 	 * @param vehicleDetails 
 	 * @return
 	 */
-	List<DeliveryEstimate> calcualteDeliveryTime(PackageSummary packageDetailsSummary, List<Package> packageDetails, Vehicle vehicleDetails);
+	List<DeliveryEstimate> calcualteDeliveryTime(PackageSummary packageSummary, List<Package> packages, Vehicle vehicleDetails);
 
 }

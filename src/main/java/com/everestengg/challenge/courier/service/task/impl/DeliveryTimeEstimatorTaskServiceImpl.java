@@ -14,7 +14,7 @@ import com.everestengg.challenge.courier.model.DeliveryEstimate;
 import com.everestengg.challenge.courier.model.Package;
 import com.everestengg.challenge.courier.model.PackageSummary;
 import com.everestengg.challenge.courier.model.Vehicle;
-import com.everestengg.challenge.courier.service.delivery.DeliveryCostEstimator;
+import com.everestengg.challenge.courier.service.delivery.DeliveryEstimator;
 import com.everestengg.challenge.courier.service.task.TaskService;
 import com.everestengg.challenge.courier.service.useraction.UserActionService;
 
@@ -40,7 +40,7 @@ public class DeliveryTimeEstimatorTaskServiceImpl implements TaskService {
 	private UserActionService vehicleDetailsPromptService;
 	
 	@Autowired
-	private DeliveryCostEstimator deliveryCostEstimator;
+	private DeliveryEstimator deliveryEstimator;
 	
 	List<Package> packageDetailsList = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class DeliveryTimeEstimatorTaskServiceImpl implements TaskService {
 		log.debug("{}", packageDetailsList);
 		
 		Vehicle vehicleDetails = (Vehicle) vehicleDetailsPromptService.promptUser(scanner);
-		List<DeliveryEstimate> timeEstimates = deliveryCostEstimator.calcualteDeliveryTime(packageSummary, packageDetailsList, vehicleDetails);
+		List<DeliveryEstimate> timeEstimates = deliveryEstimator.calcualteDeliveryTime(packageSummary, packageDetailsList, vehicleDetails);
 		StringBuilder sb = new StringBuilder();
 		timeEstimates.stream().forEach(de-> {
 			sb.append(CommonConstants.NEXT_LINE);

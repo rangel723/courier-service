@@ -14,8 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import com.everestengg.challenge.courier.common.CommonUtil;
 import com.everestengg.challenge.courier.model.DeliveryEstimate;
 import com.everestengg.challenge.courier.model.DiscountCouponCodeProperties;
 import com.everestengg.challenge.courier.model.DiscountCouponCodeProperties.CouponCode;
@@ -31,6 +33,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author Rangel
  * 
  */
+@ActiveProfiles("local")
 @Slf4j
 class DeliveryCostEstimatorTest {
 
@@ -39,9 +42,18 @@ class DeliveryCostEstimatorTest {
 	static final Package PKG3 = Package.builder().pkgId("PKG3").pkgWeightInKg(175).distanceInKm(100).offerCode("OFR003").build();
 	static final Package PKG4 = Package.builder().pkgId("PKG4").pkgWeightInKg(110).distanceInKm(60).offerCode("OFR002").build();
 	static final Package PKG5 = Package.builder().pkgId("PKG5").pkgWeightInKg(155).distanceInKm(95).offerCode("NA").build();
+	
+	static final DeliveryEstimate DE1 = DeliveryEstimate.builder().pkgId("PKG1").discount(0).totalCost(750).estimatedDeliveryTimeInHours(3.98).build();
+	static final DeliveryEstimate DE2 = DeliveryEstimate.builder().pkgId("PKG2").discount(0).totalCost(1475).estimatedDeliveryTimeInHours(1.78).build();
+	static final DeliveryEstimate DE3 = DeliveryEstimate.builder().pkgId("PKG3").discount(0).totalCost(2350).estimatedDeliveryTimeInHours(1.42).build();
+	static final DeliveryEstimate DE4 = DeliveryEstimate.builder().pkgId("PKG4").discount(105).totalCost(1395).estimatedDeliveryTimeInHours(0.85).build();
+	static final DeliveryEstimate DE5 = DeliveryEstimate.builder().pkgId("PKG5").discount(0).totalCost(2125).estimatedDeliveryTimeInHours(4.19).build();
 
 	@InjectMocks
-	DeliveryCostEstimatorImpl underTests = new DeliveryCostEstimatorImpl();
+	DeliveryEstimatorImpl underTests = new DeliveryEstimatorImpl();
+	
+	@Spy
+	private CommonUtil commonUtil;
 	
 	@Spy
 	private PackageHelperService packageHelper = new PackageHelperServiceImpl();
@@ -50,6 +62,8 @@ class DeliveryCostEstimatorTest {
 	void init() {
 		List<CouponCode> codes = new ArrayList<>();	
 		codes.add(CouponCode.builder().id("OFR001").minDistance(1).maxDistance(200).minWeight(70).maxWeight(200).discountInPercentage(10).build());
+		codes.add(CouponCode.builder().id("OFR002").minDistance(50).maxDistance(150).minWeight(100).maxWeight(250).discountInPercentage(7).build());
+		codes.add(CouponCode.builder().id("OFR003").minDistance(50).maxDistance(250).minWeight(10).maxWeight(150).discountInPercentage(5).build());
 		DiscountCouponCodeProperties discountOffers = new DiscountCouponCodeProperties();
 		discountOffers.setCouponCodes(codes);
 		discountOffers.setCouponCodesMap(codes.stream().collect(Collectors.toMap(CouponCode::getId, Function.identity())));
@@ -132,7 +146,12 @@ class DeliveryCostEstimatorTest {
 		
 		List<DeliveryEstimate> result = underTests.calcualteDeliveryTime(summary, packageDetailsList,
 				vehicle);
-		 
+		assertThatCollection(result).containsExactlyInAnyOrder(DE1, DE2, DE3, DE4, DE5);
 	}
 	
+	@Test
+	void findVehicleIndexWithLowerDeliveryTimeTest() {
+		assertEquals(2, underTests.findVehicleIndexWithLowerDeliveryTime(new double[]{1.5,4.3,0.6,2.8,11}));
+		assertEquals(0, underTests.findVehicleIndexWithLowerDeliveryTime(new double[]{1.5,4.3,9.6,2.8,11}));
+	}
 }

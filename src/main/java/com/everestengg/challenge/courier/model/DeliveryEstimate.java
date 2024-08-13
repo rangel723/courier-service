@@ -25,6 +25,6 @@ public class DeliveryEstimate implements UserInput {
 	
 	private Integer totalCost;
 	
-	private Float estimatedDeliveryTimeInHours;
+	private Double estimatedDeliveryTimeInHours;
 	
 }

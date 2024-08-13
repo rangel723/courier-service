@@ -12,7 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 
+import com.everestengg.challenge.courier.common.CommonUtil;
 import com.everestengg.challenge.courier.model.DiscountCouponCodeProperties;
 import com.everestengg.challenge.courier.model.DiscountCouponCodeProperties.CouponCode;
 import com.everestengg.challenge.courier.model.Package;
@@ -26,6 +28,9 @@ class PackageHelperServiceTest {
 
 	@Mock
 	DiscountCouponCodeProperties discountOffers;
+	
+	@Spy
+	private CommonUtil commonUtil;
 
 	@InjectMocks
 	PackageHelperService underTests = new PackageHelperServiceImpl();
@@ -68,11 +73,11 @@ class PackageHelperServiceTest {
 	
 	@Test
 	void calculateTime() {
-		assertEquals(0.42, underTests.deliveryTime(30, 70));
-		assertEquals(1.78, underTests.deliveryTime(125, 70));
-		assertEquals(1.42, underTests.deliveryTime(100, 70));
-		assertEquals(0.85, underTests.deliveryTime(60, 70));
-		assertEquals(1.35, underTests.deliveryTime(95, 70));
+		assertEquals(0.42, commonUtil.trim(underTests.deliveryTime(30, 70), 2));
+		assertEquals(1.78, commonUtil.trim(underTests.deliveryTime(125, 70), 2));
+		assertEquals(1.42, commonUtil.trim(underTests.deliveryTime(100, 70), 2));
+		assertEquals(0.85, commonUtil.trim(underTests.deliveryTime(60, 70), 2));
+		assertEquals(1.35, commonUtil.trim(underTests.deliveryTime(95, 70), 2));
 		
 	}
 

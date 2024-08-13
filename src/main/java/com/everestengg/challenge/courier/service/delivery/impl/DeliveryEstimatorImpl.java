@@ -8,12 +8,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.everestengg.challenge.courier.common.CommonUtil;
 import com.everestengg.challenge.courier.model.DeliveryEstimate;
 import com.everestengg.challenge.courier.model.Freight;
 import com.everestengg.challenge.courier.model.Package;
 import com.everestengg.challenge.courier.model.PackageSummary;
 import com.everestengg.challenge.courier.model.Vehicle;
-import com.everestengg.challenge.courier.service.delivery.DeliveryCostEstimator;
+import com.everestengg.challenge.courier.service.delivery.DeliveryEstimator;
 import com.everestengg.challenge.courier.service.helper.PackageHelperService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,25 +25,28 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class DeliveryCostEstimatorImpl implements DeliveryCostEstimator {
+public class DeliveryEstimatorImpl implements DeliveryEstimator {
 	
 	@Autowired
 	private PackageHelperService packageHelper;
 	
+	@Autowired
+	private CommonUtil commonUtil;
+	
 	@Override
-	public List<DeliveryEstimate> calculateDeliveryCost(PackageSummary packageDetailsSummary,
-			List<Package> packageDetails) {
+	public List<DeliveryEstimate> calculateDeliveryCost(PackageSummary packageSummary,
+			List<Package> packages) {
 		List<DeliveryEstimate> estimate = new ArrayList<>();
-		for(Package pkg: packageDetails) {
-			estimate.add(calculateDeliveryCost(packageDetailsSummary, pkg));
+		for(Package pkg: packages) {
+			estimate.add(calculateDeliveryCost(packageSummary, pkg));
 		}
 		log.debug("Result = "+ estimate);
 		return estimate;
 	}
 	
-	private DeliveryEstimate calculateDeliveryCost(PackageSummary packageDetailsSummary,
+	private DeliveryEstimate calculateDeliveryCost(PackageSummary packageSummary,
 			Package pkg) {
-		int baseDeliveryCost = packageDetailsSummary.getBaseDeliveryCost();
+		int baseDeliveryCost = packageSummary.getBaseDeliveryCost();
 		int deliveryCost = packageHelper.deliveryCost(baseDeliveryCost, pkg.getPkgWeightInKg(), pkg.getDistanceInKm());
 		int discount = packageHelper.applyDiscount(pkg, deliveryCost);
 		int discountedPrice = deliveryCost - discount;
@@ -51,9 +55,11 @@ public class DeliveryCostEstimatorImpl implements DeliveryCostEstimator {
 
 	
 	@Override
-	public List<DeliveryEstimate> calcualteDeliveryTime(PackageSummary packageDetailsSummary,
+	public List<DeliveryEstimate> calcualteDeliveryTime(PackageSummary packageSummary,
 			List<Package> packagesList, Vehicle vehicleDetails) {
 		List<DeliveryEstimate> estimate = new ArrayList<>();
+		
+		double[] vehicleDeliveryTimeArry = new double[vehicleDetails.getNoOfVehicles()];
 		
 		while(!packagesList.isEmpty()) {
 			List<List<Package>> possibleCombinations = new ArrayList<>();
@@ -66,8 +72,6 @@ public class DeliveryCostEstimatorImpl implements DeliveryCostEstimator {
 	        for(int i=0; i<possibleCombinations.size(); i++) {
 	        	freightList.add(Freight.builder().freightItems(possibleCombinations.get(i)).build());
 	        }
-	        
-	        List<Package> freightToTransport = new ArrayList<>();
 	        
 	        //Sorting the freight so as to pick packages as per business case
 	        Comparator<Freight> compareByNoOfPackages = Comparator.comparing(Freight::getNoOfPackages).reversed();
@@ -83,18 +87,51 @@ public class DeliveryCostEstimatorImpl implements DeliveryCostEstimator {
 	        Comparator<Freight> freightPriorityComparator = compareByNoOfPackages.thenComparing(compareByWeight).thenComparing(compareByDeliveryTime);
 	        freightList.sort(freightPriorityComparator);
 	        
-	        freightToTransport.addAll(freightList.get(0).getFreightItems());
-	        log.debug("DeliveryDistance- {}", freightList.get(0).getDeliveryDistance());
-	        log.debug("DeliveryTime- {}", packageHelper.deliveryTime(freightList.get(0).getDeliveryDistance(), vehicleDetails.getMaxSpeed()));
+	        List<Package> packagesToTransport = new ArrayList<>(); //packages to ship currently
+	        Freight freightSelected = freightList.get(0);
+	        packagesToTransport.addAll(freightSelected.getFreightItems());
+
+			double freightMaxDeliveryTime = packageHelper.deliveryTime(freightSelected.getDeliveryDistance(), vehicleDetails.getMaxSpeed());
+			 
+	        
+	        //Removing from the packages as these packages already considered
+	        packagesList.removeAll(packagesToTransport);
 	        
 	        //Vehicle
+	        int vehicleIndex = findVehicleIndexWithLowerDeliveryTime(vehicleDeliveryTimeArry);
 	        
-	        packagesList.removeAll(freightToTransport);
+	        /** 
+        	 * If item to deliver, vehicle doesn't need to come back. Hence delivery time only will be considered.
+        	 * In-case more packages pending, then need to consider time to get back to loading station.  
+        	 */
+	        double previousTimeToadd = vehicleDeliveryTimeArry[vehicleIndex];
+        	
+	        for(Package pkg: freightSelected.getFreightItems()) {
+	        	DeliveryEstimate deliveryCost = calculateDeliveryCost(packageSummary, pkg);
+	        	deliveryCost.setEstimatedDeliveryTimeInHours(commonUtil.trim(previousTimeToadd + packageHelper.deliveryTime(pkg.getDistanceInKm(), vehicleDetails.getMaxSpeed()), 2));
+				estimate.add(deliveryCost);
+			}
+	        vehicleDeliveryTimeArry[vehicleIndex] = previousTimeToadd + commonUtil.trim(freightMaxDeliveryTime, 2) * 2;
 		}
 		
+		estimate.sort(Comparator.comparing(DeliveryEstimate::getPkgId));
 		return estimate;
 	}
 	
+	/**
+	 * @param deliveryVehiclesTime
+	 * @return
+	 */
+	protected int findVehicleIndexWithLowerDeliveryTime(double[] vehicleDeliveryTimeArr) {
+		int lowestValueIndex = 0;
+		for(int i=0; i<vehicleDeliveryTimeArr.length; i++) {
+			if(vehicleDeliveryTimeArr[i] < vehicleDeliveryTimeArr[lowestValueIndex]) {
+				lowestValueIndex = i;
+			}
+		}
+		return lowestValueIndex;
+	}
+
 	/**
 	 * Recursive method to generate all possible package combinations
 	 * Also filters by maxCarriableWeight

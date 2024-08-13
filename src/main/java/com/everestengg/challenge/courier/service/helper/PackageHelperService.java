@@ -31,4 +31,5 @@ public interface PackageHelperService {
 	 * @return
 	 */
 	double deliveryTime(int distance, int speed);
+	
 }

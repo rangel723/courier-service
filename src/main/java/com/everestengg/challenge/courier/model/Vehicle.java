@@ -20,4 +20,5 @@ public class Vehicle implements UserInput {
 	private Integer maxSpeed;
 	
 	private Integer maxCarriableWeight;
+	
 }

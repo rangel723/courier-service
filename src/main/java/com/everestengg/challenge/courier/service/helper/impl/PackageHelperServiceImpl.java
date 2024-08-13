@@ -1,9 +1,6 @@
 /* Copyright © 2023 ALL RIGHTS RESERVED. */
 package com.everestengg.challenge.courier.service.helper.impl;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +18,7 @@ public class PackageHelperServiceImpl implements PackageHelperService {
 
 	@Autowired
 	private DiscountCouponCodeProperties discountOffers;
-
+	
 	@Override
 	public int applyDiscount(Package packageDetails, int deliveryCost) {
 		if (discountOffers.getCouponCodesMap().containsKey(packageDetails.getOfferCode())) {
@@ -46,10 +43,7 @@ public class PackageHelperServiceImpl implements PackageHelperService {
 	@Override
 	public double deliveryTime(int distance, int speed) {
 		if(speed != 0) {
-			double time = (double)distance/speed;
-			DecimalFormat df = new DecimalFormat("0.##");
-		    df.setRoundingMode(RoundingMode.DOWN);
-			return Double.valueOf(df.format(time));
+			return (double) distance/speed;
 		}
 		return 0;
 	}
